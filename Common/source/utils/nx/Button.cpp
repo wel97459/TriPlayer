@@ -1,5 +1,6 @@
 #include <cstring>
 #include "utils/nx/Button.hpp"
+#include <algorithm>
 
 namespace NX {
     std::string buttonToCharacter(const Button b) {
