@@ -83,10 +83,7 @@ endif
 #----------------------------------------------------------------------------------------------------------------------
 .PHONY: all clean
 #----------------------------------------------------------------------------------------------------------------------
-all: $(SOURCE)/taglib_config.h $(OUTPUT)
-
-$(SOURCE)/taglib_config.h:
-	@cp $(SOURCE)/taglib_config.h.cmake $(SOURCE)/taglib_config.h
+all: $(OUTPUT)
 
 # Compiles each object file
 .SECONDEXPANSION:
