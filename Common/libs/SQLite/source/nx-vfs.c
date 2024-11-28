@@ -1,5 +1,7 @@
 #include "sqlite3.h"
 #include <switch.h>
+#include <stdio.h>
+#include <string.h>
 
 // Important points:
 // - There is no file truncation
@@ -178,7 +180,7 @@ static int nxLock(sqlite3_file * pFile, int lock) {
 static int nxUnlock(sqlite3_file * pFile, int lock) {
     return SQLITE_OK;
 }
-static int nxCheckReservedLock(sqlite3_file * pFile, int lock) {
+static int nxCheckReservedLock(sqlite3_file * pFile, int *lock) {
     return SQLITE_OK;
 }
 
@@ -248,7 +250,7 @@ static int nxOpen(sqlite3_vfs * vfs, const char * path, sqlite3_file * pFile, in
     // Allocate memory for file object and open
     memset(pFile, 0, sizeof(nxFile));
     rc = fsFsOpenFile(&fs, path, mode, &file->file);
-    printf("%s: %i %i\n", path, R_MODULE(rc), R_DESCRIPTION(rc));
+    fprintf(stdout,"%s: %i %i\n", path, R_MODULE(rc), R_DESCRIPTION(rc));
     if (R_FAILED(rc)) {
         file->base.pMethods = NULL;     // Prevents nxClose being called
         sqlite3_free(tmpBuf);

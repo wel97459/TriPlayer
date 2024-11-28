@@ -1,5 +1,6 @@
 #include "ui/element/ScrollableGrid.hpp"
-
+#include <vector>
+#include <algorithm>
 // Variables to alter scroll animation
 #define CATCHUP 13.5
 #define DAMPENING 20
@@ -50,7 +51,9 @@ namespace CustomElm {
             if (this->hasSelectable() && this->focused() != nullptr) {
                 if (!(this->focused()->y() >= this->y() && this->focused()->y() + this->focused()->h() <= this->y() + this->h())) {
                     // Find previously selected child and get it's column
+
                     std::vector<Aether::Element *>::iterator it = std::find(this->children.begin(), this->children.end(), this->focused());
+
                     if (it != this->children.end()) {
                         size_t col = std::distance(this->children.begin(), it) % cols;
 
